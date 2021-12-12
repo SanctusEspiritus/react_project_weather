@@ -1,0 +1,23 @@
+.cart {
+    background-color: #2196F3;
+    transition: background-color 1s linear;
+    border-radius: 10px/20px;
+    padding: 20px;
+    height: 130px;
+    width: 150px;
+    margin: 10px;
+}
+
+.cart:hover {
+    background-color: #dfe2f5;
+    color: black;
+}
+
+.weatherMain {
+    display: flex;
+    align-items: center;
+}
+
+.cityName {
+    font-size: 20px;
+}

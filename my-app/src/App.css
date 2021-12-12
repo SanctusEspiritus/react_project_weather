@@ -1,0 +1,19 @@
+.pageWeather {
+  background-image: url(./images/back_weather.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.pageWeather_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.cartsWeather {
+  flex-grow: 1;
+}
