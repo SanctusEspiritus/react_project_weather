@@ -10,8 +10,8 @@ export const weatherAPI = {
     
     getCityWeather(city) {
         return instance.get(`/weather?q=${city}&appid=${api_key}&units=metric`)
-            .then(response => { 
-                return response; 
+            .then(response => {
+                return response;
             });
     }
     

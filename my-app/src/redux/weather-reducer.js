@@ -2,9 +2,10 @@ import { objSity } from "../commonFunc/common-func";
 import { weatherAPI } from "../DAL/api";
 
 const ADD_CITY_WEATHER = "weather-reducer/ADD-CITY-WEATHER";
+const UPDATE_CITIES = "weather-reduce/UPDATE_CITIES";
 
 let initialState = {
-    sities: []
+    cities: []
 }
 
 const weatherReducer = (state = initialState, action) => {
@@ -12,7 +13,13 @@ const weatherReducer = (state = initialState, action) => {
         case ADD_CITY_WEATHER: {
             return {
                 ...state,
-                sities: [...state.sities, objSity(action.data)]
+                cities: [...state.cities, objSity(action.data)]
+            }
+        }
+        case UPDATE_CITIES: {
+            return {
+                ...state,
+                cities: action.cities
             }
         }
         default:
@@ -20,7 +27,8 @@ const weatherReducer = (state = initialState, action) => {
     }
 }
 
-export const addCityInState = (data) => ({ type: ADD_CITY_WEATHER, data: data.data });
+const addCityInState = (data) => ({ type: ADD_CITY_WEATHER, data: data.data });
+export const updateCities = (cities) => ({ type: UPDATE_CITIES, cities });
 
 export const getCityWeatherDetail = (city) => async (dispatch) => {
     let data = await weatherAPI.getCityWeather(city);
