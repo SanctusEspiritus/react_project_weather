@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
-import { getCityWeatherDetail, updateCities } from "../../redux/weather-reducer";
+import { getCityWeatherDetail, updateCities, deleteCityCartInStore } from "../../redux/weather-reducer";
 import { Cart } from "./Cart/Cart";
 import style from "./CartsWeather.module.css";
 
@@ -21,15 +21,18 @@ class CartsWeather extends React.Component {
         }
     }
 
-    componentDidUpdate() {
-        if (this.state.cities.length !== this.props.cities.length) {
+    componentDidUpdate(prevProps) {
+        if (prevProps.cities !== this.props.cities) {
             this.setCitiesState(this.props.cities);
         }
     }
 
     setCitiesState = (propsCities) => {
-        if (propsCities.length > 0) {
-            this.state.cities.push(propsCities[propsCities.length - 1]);
+        if (propsCities.length > 0 || propsCities.length !== this.state.cities.length) {
+            let arrayCities = [];
+            propsCities.forEach(city => arrayCities.push(city));
+            this.state.cities.length = 0;
+            arrayCities.forEach(city => this.state.cities.push(city));
             localStorage.setItem('cities', JSON.stringify(this.state.cities));
         }
     };
@@ -38,18 +41,25 @@ class CartsWeather extends React.Component {
         this.props.getCityWeatherDetail(data.city);
     }
 
+    updateCityCart = (cityName) => {
+        this.props.getCityWeatherDetail(cityName, true);
+    }
+
+    deleteCityCart = (objCity) => {
+        this.props.deleteCityCartInStore(objCity);
+    }
+
     render() {
         return (
             <div>
                 <FormAddCityRedux onSubmit={this.addCityCart} />
                 <div className={style.cartsWeather}>
                     {
-                        this.props.cities.map(sity =>
-                            <Cart cityName={sity.name}
-                                weatherIcon={`http://openweathermap.org/img/w/${sity.weather.icon}.png`}
-                                weatherMain={sity.weather.main}
-                                weatherTemp={sity.main.temp}
-                                weatherDescription={sity.weather.description} />)
+                        this.props.cities.map(city =>
+                            <Cart key={city.id}
+                                city={city}
+                                updateCityCart={this.updateCityCart}
+                                deleteCityCart={this.deleteCityCart} />)
                     }
                 </div>
             </div>
@@ -75,5 +85,5 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, { getCityWeatherDetail, updateCities }))
+    connect(mapStateToProps, { getCityWeatherDetail, updateCities, deleteCityCartInStore }))
     (CartsWeather);

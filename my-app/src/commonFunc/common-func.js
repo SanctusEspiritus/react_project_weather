@@ -1,4 +1,4 @@
-export const objSity = (data) => {
+const objSity = (data) => {
     return {
         name: data.name,
         id: data.id,
@@ -33,6 +33,29 @@ export const objSity = (data) => {
     }
 }
 
+const cityInState = (state, objCity) => state.cities.find(city => city.name === objCity.name);
+
 const roundTheNumber = (num) => {
     return Math.round(num);
+}
+
+export const updateCityWeatherInState = (state, objCity) => {
+    return state.cities.map(city => {
+        if (city.id === objCity.id) {
+            city = objSity(objCity);
+        }
+        return city;
+    })
+}
+
+export const checkAndAddCityInState = (state, objCity) => {
+    if (!cityInState(state, objCity)) {
+        return [...state.cities, objSity(objCity)];
+    } else {
+        return updateCityWeatherInState(state, objCity);
+    }
+}
+
+export const deleteCityWeatherInStore = (state, objCity) => {
+    return state.cities.filter(city => city !== objCity);
 }

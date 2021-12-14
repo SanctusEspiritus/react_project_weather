@@ -1,5 +1,6 @@
 
 export const CartDetail = (props) => {
+
     return (
         <div>
             <div>город + иконка</div>

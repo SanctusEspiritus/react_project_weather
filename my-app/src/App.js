@@ -13,8 +13,8 @@ const App = () => {
         <Header />
         <div className="cartsWeather">
           <Routes>
-            <Route path="/weather" element={<CartsWeather />} />
-            <Route path="/weather_detail" element={<CartDetail />} />
+            <Route path="/" element={<CartsWeather />} />
+            <Route path="/weather" element={<CartDetail />} />
           </Routes>
         </div>
         <Footer />
