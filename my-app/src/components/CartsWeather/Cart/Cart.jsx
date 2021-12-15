@@ -9,12 +9,13 @@ export const Cart = (props) => {
                 className={`${style.btn_update} ${style.btn_delete}`}>
                 Delete city weather
             </button>
-            <NavLink to={`/weather/${props.city.name}`}>
+            <NavLink to={"/weather_detail"} state={{city: props.city}}>
                 <div className={style.cart}>
                     <div className={style.cityName}>{props.city.name}</div>
                     <div className={style.weatherMain}>
                         <span className={style.weatherIcon}>
-                            <img src={`http://openweathermap.org/img/w/${props.city.weather.icon}.png`} />
+                            <img src={`http://openweathermap.org/img/w/${props.city.weather.icon}.png`}
+                                alt={"weather icon"} />
                         </span>
                         <span className={style.weatherMain}>
                             {props.city.weather.main}
@@ -30,7 +31,8 @@ export const Cart = (props) => {
             </NavLink>
             <button
                 className={style.btn_update}
-                onClick={() => { props.updateCityCart(props.city.name) }}>Update weather in city
+                onClick={() => { props.updateCityCart(props.city.name) }}>
+                Update weather in city
             </button>
         </div>
     );

@@ -7,7 +7,7 @@ export const Footer = () => {
             <span>
                 Powered by the 
             </span>
-            <img src={heart} />
+            <img src={heart} alt={"heart"}/>
         </footer>
     );
 }

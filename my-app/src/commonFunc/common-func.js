@@ -27,8 +27,8 @@ const objSity = (data) => {
         sys: {
             id: data.sys.id,
             country: data.sys.country,
-            sunrise: data.sys.sunrise,
-            sunset: data.sys.sunset
+            sunrise: setUTCTime(data.sys.sunrise),
+            sunset: setUTCTime(data.sys.sunset)
         }
     }
 }
@@ -37,6 +37,12 @@ const cityInState = (state, objCity) => state.cities.find(city => city.name === 
 
 const roundTheNumber = (num) => {
     return Math.round(num);
+}
+
+const setUTCTime = (timeUtc) => {
+    const sec = timeUtc;
+    const date = new Date(sec * 1000);
+    return date.toLocaleTimeString();
 }
 
 export const updateCityWeatherInState = (state, objCity) => {
