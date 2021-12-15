@@ -1,42 +1,42 @@
 .weather_detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .weather_detail div {
-    text-shadow: 3px 3px 3px #000000;
-    color: rgb(255, 255, 255);
-    font-size: 26px;
-    padding: 4px;
+  text-shadow: 3px 3px 3px #000000;
+  color: rgb(255, 255, 255);
+  font-size: 26px;
+  padding: 4px;
 }
 
 .weather_detail a {
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 15px;
-    margin: 10px 20px;
-    font-size: 22px;
-    padding: 10px;
-    width: 170px;
-    text-align: center;
-    background: white;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
-    transition: .3s;
-    color: black;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 15px;
+  margin: 10px 20px;
+  font-size: 22px;
+  padding: 10px;
+  width: 170px;
+  text-align: center;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  color: black;
 }
 
 .weather_detail a:hover {
-    background: #1da6f5;
-    box-shadow: 0 15px 20px rgba(12, 12, 12, 0.4);
-    color: white;
+  background: #1da6f5;
+  box-shadow: 0 15px 20px rgba(12, 12, 12, 0.4);
+  color: white;
 }
 
 .weather_desc {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-.weather_desc img{
-    width: 100px;
+.weather_desc img {
+  width: 100px;
 }

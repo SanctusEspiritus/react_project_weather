@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
+import React from "react";
+import "./App.css";
+import { Footer } from "./components/Footer/Footer";
+import { Header } from "./components/Header/Header";
 import { Routes, Route } from "react-router-dom";
-import CartsWeather from './components/CartsWeather/CartsWeather';
-import { CartWeatherDetail } from './components/CartsWeather/CartDetail/CartDetail';
+import CartsWeather from "./components/CartsWeather/CartsWeather";
+import { CartWeatherDetail } from "./components/CartsWeather/CartDetail/CartDetail";
 
 const App = () => {
   return (
@@ -21,6 +21,6 @@ const App = () => {
       </div>
     </div>
   );
-}
+};
 
 export default App;

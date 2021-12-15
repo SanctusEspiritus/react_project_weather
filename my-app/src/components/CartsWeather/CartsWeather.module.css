@@ -1,52 +1,51 @@
-
 .cartsWeather {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .cartsWeather a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 
 .formAddCity {
-    text-align: center;
+  text-align: center;
 }
 
 .formAddCity input {
-    transition: .3s;
-    font-size: 18px;
-    color:black;
+  transition: 0.3s;
+  font-size: 18px;
+  color: black;
 }
 
 .formAddCity input:focus {
-    background: #1da6f5;
-    box-shadow: 0 15px 20px rgba(12, 12, 12, 0.4);
-    color: white;
+  background: #1da6f5;
+  box-shadow: 0 15px 20px rgba(12, 12, 12, 0.4);
+  color: white;
 }
 
 .formAddCity button {
-    text-decoration: none;
-    display: inline-block;
-    width: 140px;
-    height: 45px;
-    line-height: 45px;
-    border-radius: 45px;
-    margin: 10px 20px;
-    font-size: 11px;
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 3px;
-    font-weight: 600;
-    color: #524f4e;
-    background: white;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
-    transition: .3s;
+  text-decoration: none;
+  display: inline-block;
+  width: 140px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  margin: 10px 20px;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #524f4e;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 
 .formAddCity button:hover {
-    background: #1da6f5;
-    box-shadow: 0 15px 20px rgba(12, 12, 12, 0.4);
-    color: white;
+  background: #1da6f5;
+  box-shadow: 0 15px 20px rgba(12, 12, 12, 0.4);
+  color: white;
 }
