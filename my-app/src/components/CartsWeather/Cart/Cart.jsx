@@ -2,8 +2,9 @@ import { NavLink } from "react-router-dom";
 import style from "./Cart.module.css";
 
 export const Cart = (props) => {
+  
   return (
-    <div className={style.parent_cart}>
+    <div className={`${style.parent_cart} ${style.anim_show}`}>
       <button
         onClick={() => {
           props.deleteCityCart(props.city);

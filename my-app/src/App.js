@@ -4,7 +4,7 @@ import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 import { Routes, Route } from "react-router-dom";
 import CartsWeather from "./components/CartsWeather/CartsWeather";
-import { CartWeatherDetail } from "./components/CartsWeather/CartDetail/CartDetail";
+import CartDetailContainer from "./components/CartsWeather/CartDetail/CartDetailContainer";
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
         <div className="cartsWeather">
           <Routes>
             <Route path="/" element={<CartsWeather />} />
-            <Route path="/weather_detail" element={<CartWeatherDetail />} />
+            <Route path="/weather_detail" element={<CartDetailContainer />} />
           </Routes>
         </div>
         <Footer />
