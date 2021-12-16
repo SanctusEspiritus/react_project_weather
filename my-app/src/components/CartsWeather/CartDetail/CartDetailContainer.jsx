@@ -8,15 +8,22 @@ const CartWeatherDetailContainer = (props) => {
   const location = useLocation();
   const dataCity = location.state.city;
 
-  let cityWeatherHourly = findCityOnHourly(dataCity.coord.lat, dataCity.coord.lon, props.hourlyWeatherCities);
-  return <CartWeatherDetail dataCity={dataCity} cityWeatherHourly={cityWeatherHourly}/>;
-
+  let cityWeatherHourly = findCityOnHourly(
+    dataCity.coord.lat,
+    dataCity.coord.lon,
+    props.hourlyWeatherCities
+  );
+  return (
+    <CartWeatherDetail
+      dataCity={dataCity}
+      cityWeatherHourly={cityWeatherHourly}
+    />
+  );
 };
 
 const mapDispatchToProps = (state) => ({
   hourlyWeatherCities: state.weather.hourlyWeatherCities,
+  cities: state.weather.cities,
 });
 
-export default connect(mapDispatchToProps)(
-  CartWeatherDetailContainer
-);
+export default connect(mapDispatchToProps)(CartWeatherDetailContainer);

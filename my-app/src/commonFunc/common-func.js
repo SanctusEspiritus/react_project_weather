@@ -4,7 +4,7 @@ export const objSity = (data) => {
     id: data.id,
     coord: {
       lon: data.coord.lon,
-      lat: data.coord.lat
+      lat: data.coord.lat,
     },
     weather: {
       main: data.weather[0].main,
@@ -38,21 +38,26 @@ export const objSity = (data) => {
 };
 
 const objCityHourly = (data) => {
+  let newArrayHourly = data.hourly.map((tempHour) => {
+    return { temp: roundTheNumber(tempHour.temp) };
+  });
   return {
     lat: data.lat,
     lon: data.lon,
-    hourly: data.hourly
-  }
-}
+    hourly: newArrayHourly,
+  };
+};
 
 export const findCityOnHourly = (lat, lon, arrayHourlyWeather) => {
-  arrayHourlyWeather.forEach(city => {
-    if (city.lat === lat && city.lon === lon) {
-      return city;
+  for (let i = 0; i < arrayHourlyWeather.length; i++) {
+    if (
+      arrayHourlyWeather[i].lat === lat &&
+      arrayHourlyWeather[i].lon === lon
+    ) {
+      return arrayHourlyWeather[i];
     }
-    return "Don't find sity";
-  });
-}
+  }
+};
 
 const cityInState = (state, objCity, parametr) =>
   state.find((city) => city[parametr] === objCity[parametr]);
@@ -67,7 +72,12 @@ const setUTCTime = (timeUtc) => {
   return date.toLocaleTimeString();
 };
 
-export const updateCityWeatherInState = (array, objCityUp, parametr, method) => {
+export const updateCityWeatherInState = (
+  array,
+  objCityUp,
+  parametr,
+  method
+) => {
   return array.map((city) => {
     if (city[parametr] === objCityUp[parametr]) {
       city = method(objCityUp);
@@ -80,18 +90,21 @@ export const setHourlyWeatherCity = (state, objHourlyWeather) => {
   if (!cityInState(state.hourlyWeatherCities, objHourlyWeather, "lat")) {
     return [...state.hourlyWeatherCities, objCityHourly(objHourlyWeather)];
   } else {
-    return updateCityWeatherInState(state.hourlyWeatherCities, objHourlyWeather, "lat", objCityHourly);
+    return updateCityWeatherInState(
+      state.hourlyWeatherCities,
+      objHourlyWeather,
+      "lat",
+      objCityHourly
+    );
   }
-}
+};
 
 export const checkAndAddCityInState = (state, objCityUp) => {
-  
   if (!cityInState(state.cities, objCityUp, "name")) {
     return [...state.cities, objSity(objCityUp)];
   } else {
     return updateCityWeatherInState(state.cities, objCityUp, "id", objSity);
   }
-
 };
 
 export const deleteCityWeatherInStore = (state, objCity) => {

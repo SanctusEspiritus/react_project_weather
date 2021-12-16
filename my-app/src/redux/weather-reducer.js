@@ -76,26 +76,27 @@ export const getCityWeatherDetail =
       for (let i = 0; i < city.length; i++) {
         let data = await weatherAPI.getCityWeather(city[i].name);
         dispatch(addCityInState(data));
-        getCityWeatherHourly(data.data.coord.lat, data.data.coord.lon);
+        let dataHourly = await weatherAPI.getCityHourWeather(
+          data.data.coord.lat,
+          data.data.coord.lon
+        );
+        dataHourly.data.hourly.splice(0, 24);
+        dispatch(addOrUpdateHourlyCityWeather(dataHourly));
       }
     } else {
       let data = await weatherAPI.getCityWeather(city);
       if (!update) {
         dispatch(addCityInState(data));
-        getCityWeatherHourly(data.data.coord.lat, data.data.coord.lon);
       } else {
         dispatch(updateCityWeather(data));
-        getCityWeatherHourly(data.data.coord.lat, data.data.coord.lon);
       }
+      let dataHourly = await weatherAPI.getCityHourWeather(
+        data.data.coord.lat,
+        data.data.coord.lon
+      );
+      dataHourly.data.hourly.splice(0, 24);
+      dispatch(addOrUpdateHourlyCityWeather(dataHourly));
     }
   };
-
-const getCityWeatherHourly = (lat, lon) => async (dispatch) => {
-  let data = await weatherAPI.getCityHourWeather(lat, lon);
-  // The request always returns 2 days in advance, even if the parameter is set
-  // so we exclude the data from the array of objects for another 1 day.
-  data.data.hourly.splice(0, 24);
-  dispatch(addOrUpdateHourlyCityWeather(data));
-};
 
 export default weatherReducer;

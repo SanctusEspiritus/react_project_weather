@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import style from "./CartDetail.module.css";
+
 export const CartWeatherDetail = (props) => {
-
-
   const dataCity = props.dataCity;
+
+  let [cityWeatherHourly, setcityWeatherHourly] = useState(
+    props.cityWeatherHourly
+  );
+
+  useEffect(() => {
+    setcityWeatherHourly(props.cityWeatherHourly);
+  }, [props.cityWeatherHourly]);
+
   return (
     <div className={style.parent_block}>
-      <div className={style.block_img_hour}>
-        {props.cityWeatherHourly && props.cityWeatherHourly !== "Don't find sity" &&
-          <div>test</div>
-        }
-      </div>
-      <div className={style.weather_detail}>
+      {cityWeatherHourly && cityWeatherHourly != undefined && (
+        <div className={style.block_img_hour}>
+          {cityWeatherHourly.hourly.map((tempHour) => {
+            return (
+              <div
+                className={style.block_temp_hour}
+                style={{ marginBottom: `calc(${tempHour.temp}px * 20)` }}
+              >
+                {tempHour.temp}°
+              </div>
+            );
+          })}
+        </div>
+      )}
+      <div
+        className={`${style.weather_detail} ${
+          cityWeatherHourly && cityWeatherHourly != undefined
+            ? ""
+            : `${style.weather_detail_solo}`
+        }`}
+      >
         <div>Country: {dataCity.sys.country}</div>
         <div>City: {dataCity.name}</div>
         <div className={style.weather_desc}>
