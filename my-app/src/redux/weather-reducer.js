@@ -76,12 +76,6 @@ export const getCityWeatherDetail =
       for (let i = 0; i < city.length; i++) {
         let data = await weatherAPI.getCityWeather(city[i].name);
         dispatch(addCityInState(data));
-        let dataHourly = await weatherAPI.getCityHourWeather(
-          data.data.coord.lat,
-          data.data.coord.lon
-        );
-        dataHourly.data.hourly.splice(0, 24);
-        dispatch(addOrUpdateHourlyCityWeather(dataHourly));
       }
     } else {
       let data = await weatherAPI.getCityWeather(city);
@@ -90,13 +84,13 @@ export const getCityWeatherDetail =
       } else {
         dispatch(updateCityWeather(data));
       }
-      let dataHourly = await weatherAPI.getCityHourWeather(
-        data.data.coord.lat,
-        data.data.coord.lon
-      );
-      dataHourly.data.hourly.splice(0, 24);
-      dispatch(addOrUpdateHourlyCityWeather(dataHourly));
     }
   };
+
+export const getHourlyWeather = (lat, lon) => async (dispatch) => {
+  let dataHourly = await weatherAPI.getCityHourWeather(lat, lon);
+  dataHourly.data.hourly.splice(0, 24);
+  dispatch(addOrUpdateHourlyCityWeather(dataHourly));
+};
 
 export default weatherReducer;

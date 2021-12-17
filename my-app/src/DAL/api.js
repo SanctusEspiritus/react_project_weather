@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api_key = "1bb35dc6b9f68930d3e5d62cc9fa8ae7";
+const api_key = "b9e3bb21ac9a42f8677cc7d5d3a02c8a";
 
 const instance = axios.create({
   baseURL: "http://api.openweathermap.org/data/2.5/",

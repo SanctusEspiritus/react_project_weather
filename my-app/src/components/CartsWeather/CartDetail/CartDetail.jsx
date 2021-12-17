@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import style from "./CartDetail.module.css";
 
-export const CartWeatherDetail = (props) => {
+export const CartDetail = (props) => {
   const dataCity = props.dataCity;
-
-  let [cityWeatherHourly, setcityWeatherHourly] = useState(
-    props.cityWeatherHourly
-  );
-
-  useEffect(() => {
-    setcityWeatherHourly(props.cityWeatherHourly);
-  }, [props.cityWeatherHourly]);
+  const hourlyWeatherCities = props.hourlyWeatherCities;
 
   return (
     <div className={style.parent_block}>
-      {cityWeatherHourly && cityWeatherHourly != undefined && (
+      {hourlyWeatherCities && hourlyWeatherCities != undefined && (
         <div className={style.block_img_hour}>
-          {cityWeatherHourly.hourly.map((tempHour) => {
+          {hourlyWeatherCities.hourly.map((tempHour) => {
             return (
               <div
                 className={style.block_temp_hour}
@@ -31,7 +24,7 @@ export const CartWeatherDetail = (props) => {
       )}
       <div
         className={`${style.weather_detail} ${
-          cityWeatherHourly && cityWeatherHourly != undefined
+          hourlyWeatherCities && hourlyWeatherCities != undefined
             ? ""
             : `${style.weather_detail_solo}`
         }`}
