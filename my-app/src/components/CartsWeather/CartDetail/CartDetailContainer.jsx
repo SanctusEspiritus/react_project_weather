@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useLocation } from "react-router";
 import { findCityOnHourly } from "../../../commonFunc/common-func";
-import { getHourlyWeather } from "../../../redux/weather-reducer";
+import { addOrUpdateHourlyCityWeather } from "../../../redux/weather-reducer";
 import { CartDetail } from "./CartDetail";
 
 const CartWeatherDetailContainer = (props) => {
@@ -10,7 +10,7 @@ const CartWeatherDetailContainer = (props) => {
   const dataCity = location.state.city;
 
   useEffect(() => {
-    props.getHourlyWeather(dataCity.coord.lat, dataCity.coord.lon);
+    props.addOrUpdateHourlyCityWeather(dataCity.coord.lat, dataCity.coord.lon);
   });
   
   let cityWeatherHourly = findCityOnHourly(
@@ -27,8 +27,14 @@ const CartWeatherDetailContainer = (props) => {
   );
 };
 
-const mapDispatchToProps = (state) => ({
+const mapStateToProps = (state) => ({
   hourlyWeatherCities: state.weather.hourlyWeatherCities,
 });
 
-export default connect(mapDispatchToProps, { getHourlyWeather })(CartWeatherDetailContainer);
+let mapDispatchToProps = (dispatch) => {
+  return {
+    addOrUpdateHourlyCityWeather: (lat, lon) => { dispatch({type: 'ADD_HOURLY', lat, lon})}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartWeatherDetailContainer);

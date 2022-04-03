@@ -8,7 +8,7 @@ export const CartDetail = (props) => {
 
   return (
     <div className={style.parent_block}>
-      {hourlyWeatherCities && hourlyWeatherCities != undefined && (
+      {hourlyWeatherCities && hourlyWeatherCities !== undefined && (
         <div className={style.block_img_hour}>
           {hourlyWeatherCities.hourly.map((tempHour) => {
             return (
@@ -24,7 +24,7 @@ export const CartDetail = (props) => {
       )}
       <div
         className={`${style.weather_detail} ${
-          hourlyWeatherCities && hourlyWeatherCities != undefined
+          hourlyWeatherCities && hourlyWeatherCities !== undefined
             ? ""
             : `${style.weather_detail_solo}`
         }`}

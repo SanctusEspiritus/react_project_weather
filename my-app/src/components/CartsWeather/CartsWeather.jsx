@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
 import {
-  getCityWeatherDetail,
-  deleteCityCartInStore,
+  deleteCityCartInStore
 } from "../../redux/weather-reducer";
 import { Cart } from "./Cart/Cart";
 import style from "./CartsWeather.module.css";
@@ -18,7 +17,7 @@ class CartsWeather extends React.Component {
     let cities = localStorage.getItem("cities");
     if (localStorage.getItem("cities") !== null) {
       cities = JSON.parse(cities);
-      this.props.getCityWeatherDetail(cities);
+      this.props.addCityInState(cities);
     }
   }
 
@@ -35,22 +34,26 @@ class CartsWeather extends React.Component {
     ) {
       let arrayCities = [];
       propsCities.forEach((city) => arrayCities.push(city));
-      this.state.cities.length = 0;
+      this.setState(() => {
+        return {
+          cities: []
+        };
+      });
       arrayCities.forEach((city) => this.state.cities.push(city));
       localStorage.setItem("cities", JSON.stringify(this.state.cities));
     }
   };
 
   addCityCart = (data) => {
-    this.props.getCityWeatherDetail(data.city);
+    this.props.addCityInState(data.city);
   };
 
   updateCityCart = (cityName) => {
-    this.props.getCityWeatherDetail(cityName, true);
+    this.props.updateCityWeather(cityName, true);
   };
 
   deleteCityCart = (objCity) => {
-    this.props.deleteCityCartInStore(objCity);
+    this.props.deleteCityCartSTR(objCity);
   };
 
   render() {
@@ -89,6 +92,14 @@ let mapStateToProps = (state) => {
   };
 };
 
+let mapDispatchToProps = (dispatch) => {
+  return {
+    addCityInState: (cities) => { dispatch({type: 'ADD_CITIES', cities}) },
+    updateCityWeather: (cities, update) => { dispatch({type: 'UPDATES_CITIES', cities, update}) },
+    deleteCityCartSTR: (objCity) => { dispatch(deleteCityCartInStore(objCity)) }
+  }
+}
+
 export default compose(
-  connect(mapStateToProps, { getCityWeatherDetail, deleteCityCartInStore })
+  connect(mapStateToProps, mapDispatchToProps)
 )(CartsWeather);
